@@ -1,0 +1,15 @@
+﻿ <!-- меню сайта -->
+ @{
+    var controller = ViewContext.RouteData.Values["controller"]?
+       .ToString()?
+       .ToLower()
+       ?? String.Empty;
+ }
+@* <a class="badge badge" href="#">Андрей Александров</a> *@
+<a class="navbar-brand" asp-controller="home" asp-action="index">Андрей Александров</a>
+<div class="navbar-nav">
+    <a class="nav-item nav-link @(controller=="home"?"active":"")"  asp-controller="home" asp-action="index">Лб1</a>
+    <a class="nav-item nav-link @(controller=="product"?"active":"")" asp-controller="book" asp-action="index">Каталог</a>
+    <a class="nav-item nav-link" asp-area="admin" asp-page="/index">Администрирование</a>
+</div>
+<!-- меню сайта - конец -->

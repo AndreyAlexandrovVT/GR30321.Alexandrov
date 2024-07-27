@@ -1,0 +1,47 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+<h3>Описание товара</h3>
+
+
+@if (BookService.Books != null && BookService.Books.Count() != 0)
+{
+    <table class="table table-striped">
+        <thead>
+        <th>Название</th>
+        <th></th>
+            @foreach (var item in BookService.Books)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <button class="btn btn-outline-dark"
+                            @onclick="@(()=>OnBookSelected(item.Id))">
+                        Подробно
+                    </button>
+                </td>
+            </tr>
+            }
+        </thead>
+    </table>
+}
+
+
+
+@code {
+    [CascadingParameter]
+    public IBookService<Book> BookService { get; set; }
+    [Parameter]
+    public EventCallback<int> BookSelected { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        BookService.ListChanged += StateHasChanged;
+    }
+    public async void OnBookSelected(int id)
+    {
+        await BookSelected.InvokeAsync(id);
+    }
+    public void Dispose()
+    {
+        BookService.ListChanged -= StateHasChanged;
+    }
+}

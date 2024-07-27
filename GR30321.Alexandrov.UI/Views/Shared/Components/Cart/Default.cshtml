@@ -1,0 +1,9 @@
+﻿@* <a asp-controller="Cart" asp-action="index" class="navbar-text ms-auto">
+    00,0 руб <i class="fa-solid fa-cart-shopping"></i> (0)
+</a> *@
+@using GR30321.Domain.Models
+@model Cart
+<a asp-action="Index" asp-controller="Cart" class="navbar-text ms-auto">
+    @Model.TotalSum руб <i class="fa-solid fa-cart-shopping"></i>
+    (@Model.Count)
+</a>

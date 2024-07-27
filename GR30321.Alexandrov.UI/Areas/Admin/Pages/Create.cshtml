@@ -1,0 +1,69 @@
+﻿@page
+@model GR30321.Alexandrov.UI.Areas.Admin.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Book.Name" class="control-label"></label>
+                <input asp-for="Book.Name" class="form-control" />
+                <span asp-validation-for="Book.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Description" class="control-label"></label>
+                <input asp-for="Book.Description" class="form-control" />
+                <span asp-validation-for="Book.Description" class="text-danger"></span>
+            </div>
+           @*  <div class="form-group">
+                <label asp-for="Book.Image" class="control-label"></label>
+                <input asp-for="Book.Image" class="form-control" />
+                <span asp-validation-for="Book.Image" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="Book.Avtor" class="control-label"></label>
+                <input asp-for="Book.Avtor" class="form-control" />
+                <span asp-validation-for="Book.Avtor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.PublicationDate" class="control-label"></label>
+                <input asp-for="Book.PublicationDate" class="form-control" />
+                <span asp-validation-for="Book.PublicationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Price" class="control-label"></label>
+                <input asp-for="Book.Price" class="form-control" />
+                <span asp-validation-for="Book.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.CategoryId" class="control-label"></label>
+                <select asp-for="Book.CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Image" class="form-label">Изображение</label>
+                <input asp-for="Image" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

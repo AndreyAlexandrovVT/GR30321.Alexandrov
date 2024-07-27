@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("Cart")
+    <div class="dropdown ms-4 nav-color">
+        <button class="btn btn-secondary dropdown-toggle"
+        type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+
+            @User.Claims.FirstOrDefault(c => c.Type.Equals("Name", StringComparison.OrdinalIgnoreCase))?.Value
+
+           @*  <img src="@Url.Action("GetAvatar","Image")"
+                 width="30"
+            alt="User" class="rounded nav-color" /> *@
+
+            <img src="/Image/GetAvatar"
+                 width="30"
+                 alt="User" class="rounded nav-color" />
+
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+                <span class="dropdown-item-text">
+                    @* <img src="@Url.Action("GetAvatar","Image")"
+                         width="50" alt="User" class="rounded"/> *@
+
+                    <img src="/Image/GetAvatar"
+                         width="50" alt="User" class="rounded" />
+
+                    @User.Identity?.Name
+
+                </span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnurl="/">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">
+                        Выход
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="navbar-nav ms-auto">
+        <a asp-area="Identity" asp-page="/Account/Login" class="nav-item nav-link">Войти</a>
+        <a asp-area="Identity" asp-page="/Account/Register" class="nav-item nav-link">Зарегистрироваться</a>
+    </div>
+}
